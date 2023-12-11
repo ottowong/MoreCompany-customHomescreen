@@ -15,6 +15,7 @@ using Steamworks.Data;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.Experimental.Rendering;
 using Logger = BepInEx.Logging.Logger;
 using Object = UnityEngine.Object;
 
@@ -176,7 +177,9 @@ namespace MoreCompany
         {
             if (bundle)
             {
-                mainLogo = bundle.LoadPersistentAsset<Texture2D>("assets/morecompanyassets/morecompanytransparentred.png");
+                Texture2D val = new Texture2D(2, 2);
+                bool isLoaded = ImageConversion.LoadImage(val, File.ReadAllBytes(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "ottohack/background.png")));
+                mainLogo = val;
                 quickMenuScrollParent = bundle.LoadPersistentAsset<GameObject>("assets/morecompanyassets/quickmenuoverride.prefab");
                 playerEntry = bundle.LoadPersistentAsset<GameObject>("assets/morecompanyassets/playerlistslot.prefab");
                 cosmeticGUIInstance = bundle.LoadPersistentAsset<GameObject>("assets/morecompanyassets/testoverlay.prefab");
